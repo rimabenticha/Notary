@@ -1,0 +1,28 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get_it/get_it.dart';
+
+final getIt = GetIt.instance;
+
+void setup() {
+  getIt.registerSingleton<FirebaseAuth>(FirebaseAuth.instance);
+  // getIt.registerSingleton<FirebaseFirestore>(FirebaseFirestore.instance);
+  //getIt.registerSingleton<Uuid>(const Uuid());
+
+  // getIt.registerSingleton<AuthServices>(AuthServices());
+  // //getIt.registerSingleton<FirebaseServices>(FirebaseServices());
+
+  // getIt.registerSingleton<AuthRepoImpl>(
+  //   AuthRepoImpl(authService: getIt.get<AuthServices>()),
+  // );
+
+  // getIt.registerSingleton<HomeRepoImpl>(
+  //   //HomeRepoImpl(HomeRemoteDataSourceImpl()),
+  // );
+
+  //  // getIt.registerSingleton<SettingsRepoImpl>(
+  //     //SettingsRepoImpl(
+  //       SettingsRemoteDataSourceImpl(),
+  //       authService: getIt.get<AuthServices>(),
+  //     ),
+  //   );
+}
