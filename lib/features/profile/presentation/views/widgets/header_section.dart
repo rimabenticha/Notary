@@ -1,0 +1,31 @@
+import 'package:flutter/material.dart';
+import 'package:noteary/core/styles/colors.dart';
+import 'package:noteary/core/styles/styles.dart';
+import 'package:noteary/core/utils/assets.dart';
+
+class HeaderSection extends StatelessWidget {
+  const HeaderSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const CircleAvatar(
+          radius: 50,
+          backgroundColor: MyColors.grey,
+          foregroundImage: AssetImage(AssetsData.signInIllustration),
+        ),
+        const SizedBox(height: 10),
+        Column(
+          children: [
+            Text(
+              'fullName',
+              style: Styles.textStyle20.copyWith(fontWeight: FontWeight.w500),
+            ),
+            Text('email'),
+          ],
+        ),
+      ],
+    );
+  }
+}
