@@ -1,27 +1,27 @@
 import 'package:equatable/equatable.dart';
 
 class UserModel extends Equatable {
-  final String? userId;
+  final String? uid;
   final String? fullName;
   final String? email;
 
-  const UserModel({this.userId, this.fullName, this.email});
+  const UserModel({this.uid, this.fullName, this.email});
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-    userId: json['userId'] as String?,
+    uid: json['uid'] as String?,
     fullName: json['fullName'] as String?,
     email: json['email'] as String?,
   );
 
   Map<String, dynamic> toJson() => {
-    'userId': userId,
+    'uid': uid,
     'fullName': fullName,
     'email': email,
   };
 
-  UserModel copyWith({String? userId, String? fullName, String? email}) {
+  UserModel copyWith({String? uid, String? fullName, String? email}) {
     return UserModel(
-      userId: userId ?? this.userId,
+      uid: uid ?? this.uid,
       fullName: fullName ?? this.fullName,
       email: email ?? this.email,
     );
@@ -31,5 +31,5 @@ class UserModel extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object?> get props => [userId, fullName, email];
+  List<Object?> get props => [uid, fullName, email];
 }

@@ -14,8 +14,7 @@ class PersonalDataScreenBody extends StatelessWidget {
         user: UserModel(
           fullName: 'Rima',
           email: 'rima@gmail.com',
-          photoURL: 'https://via.placeholder.com/150',
-          userId: '1234567890',
+          uid: '1234567890',
         ),
       ),
     );

@@ -26,3 +26,14 @@ final class AuthFailure extends AuthState {
   @override
   List<Object> get props => [errMessage];
 }
+
+//* User creation states
+final class UserCreationLoading extends AuthState {}
+
+final class UserCreationSuccess extends AuthState {}
+
+final class UserCreationFailure extends AuthState {
+  final String errMessage;
+
+  const UserCreationFailure({required this.errMessage});
+}

@@ -8,6 +8,7 @@ import 'package:noteary/core/utils/functions/custom_snack_bar.dart';
 import 'package:noteary/core/widgets/custom_elevated_button.dart';
 import 'package:noteary/core/widgets/custom_password_text_field.dart';
 import 'package:noteary/core/widgets/custom_text_form_field.dart';
+import 'package:noteary/features/auth/data/models/user_model.dart';
 import 'package:noteary/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
 
 class SignUpForm extends StatefulWidget {
@@ -127,6 +128,10 @@ class _SignUpFormState extends State<SignUpForm> {
                     fullName: _fullNameController.text.trim(),
                     email: _emailController.text.trim(),
                     password: _passwordController.text.trim(),
+                    userModel: UserModel(
+                      fullName: _fullNameController.text.trim(),
+                      email: _emailController.text.trim(),
+                    ),
                   );
                 }
               },
