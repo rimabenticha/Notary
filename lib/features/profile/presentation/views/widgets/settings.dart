@@ -32,7 +32,7 @@ class Settings extends StatelessWidget {
           ),
           text: 'Password',
           onPressed: () {
-            // context.push(AppRouter.kChangePasswordScreen);
+            context.push(AppRouter.kPasswordScreen);
           },
         ),
         const SizedBox(height: 10),
