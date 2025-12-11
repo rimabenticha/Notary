@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:noteary/features/profile/presentation/views/profile_screen_body.dart';
+import 'package:noteary/features/profile/presentation/views/widgets/profile_screen_body.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
