@@ -13,16 +13,16 @@ class HeaderSection extends StatelessWidget {
         const CircleAvatar(
           radius: 50,
           backgroundColor: MyColors.grey,
-          foregroundImage: AssetImage(AssetsData.signInIllustration),
+          foregroundImage: AssetImage(AssetsData.defaultAvatar),
         ),
         const SizedBox(height: 10),
         Column(
           children: [
             Text(
-              'fullName',
+              'Rima',
               style: Styles.textStyle20.copyWith(fontWeight: FontWeight.w500),
             ),
-            Text('email'),
+            Text('rima@gmail.com'),
           ],
         ),
       ],
