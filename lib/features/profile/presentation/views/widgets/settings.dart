@@ -66,7 +66,7 @@ class Settings extends StatelessWidget {
           ),
           text: 'Contact Us',
           onPressed: () {
-            // context.push(AppRouter.kContactUsScreen);
+            context.push(AppRouter.kContactUsScreen);
           },
         ),
       ],

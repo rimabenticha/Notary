@@ -5,6 +5,7 @@ import 'package:noteary/features/home/presentation/views/home_screen.dart';
 import 'package:noteary/features/navigation_menu.dart';
 import 'package:noteary/features/notes/presentation/views/new_note_screen.dart';
 import 'package:noteary/features/notes/presentation/views/note_content_screen.dart';
+import 'package:noteary/features/profile/presentation/views/contact_us_screen.dart';
 import 'package:noteary/features/profile/presentation/views/password_screen.dart';
 import 'package:noteary/features/profile/presentation/views/personal_data_screen.dart';
 
@@ -17,6 +18,7 @@ abstract class AppRouter {
   static const String kNoteConentScreen = '/noteConentScreen';
   static const String kPersonalDataScreen = '/personalDataScreen';
   static const String kPasswordScreen = '/passwordScreen';
+  static const String kContactUsScreen = '/contactUsScreen';
 
   static final router = GoRouter(
     routes: [
@@ -48,6 +50,10 @@ abstract class AppRouter {
       GoRoute(
         path: kPasswordScreen,
         builder: (context, state) => const PasswordScreen(),
+      ),
+      GoRoute(
+        path: kContactUsScreen,
+        builder: (context, state) => const ContactUsScreen(),
       ),
     ],
   );
