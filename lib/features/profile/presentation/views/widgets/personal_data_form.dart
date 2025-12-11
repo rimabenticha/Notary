@@ -26,7 +26,7 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
   @override
   void initState() {
     super.initState();
-    _fullNameController.text = widget.user.username ?? '';
+    _fullNameController.text = widget.user.fullName ?? '';
     _emailController.text = widget.user.email ?? '';
   }
 

@@ -6,14 +6,18 @@ import 'package:noteary/features/profile/presentation/views/widgets/personal_dat
 class PersonalDataScreenBody extends StatelessWidget {
   const PersonalDataScreenBody({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(padding: kPadd16, child: PersonalDataForm(user: UserModel(
-      username: 'Rima',
-      email: 'rima@gmail.com',
-      photoURL: 'https://via.placeholder.com/150',
-      userId: '1234567890',
-    )));
+    return SingleChildScrollView(
+      padding: kPadd16,
+      child: PersonalDataForm(
+        user: UserModel(
+          fullName: 'Rima',
+          email: 'rima@gmail.com',
+          photoURL: 'https://via.placeholder.com/150',
+          userId: '1234567890',
+        ),
+      ),
+    );
   }
 }

@@ -23,7 +23,7 @@ class AuthRepoImpl implements AuthRepo {
   Future<Either<Failure, User>> signUp({
     required String email,
     required String password,
-    required String username,
+    required String fullName,
   }) async {
     try {
       final userCredential = await authService.createUserWithEmailAndPassword(
@@ -31,7 +31,7 @@ class AuthRepoImpl implements AuthRepo {
         password: password,
       );
 
-      await userCredential.user?.updateDisplayName(username);
+      await userCredential.user?.updateDisplayName(fullName);
       await userCredential.user?.reload();
       final updatedUser = getIt.get<FirebaseAuth>().currentUser;
 

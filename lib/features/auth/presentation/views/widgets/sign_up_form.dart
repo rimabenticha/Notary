@@ -124,7 +124,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   log("Email: ${_emailController.text}");
                   log("Mot de passe: ${_passwordController.text}");
                   await context.read<AuthCubit>().signUp(
-                    username: _fullNameController.text.trim(),
+                    fullName: _fullNameController.text.trim(),
                     email: _emailController.text.trim(),
                     password: _passwordController.text.trim(),
                   );
