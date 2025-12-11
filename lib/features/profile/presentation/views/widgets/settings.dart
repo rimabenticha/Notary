@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:noteary/core/styles/colors.dart';
+import 'package:noteary/core/utils/app_router.dart';
 import 'package:noteary/features/profile/presentation/views/widgets/settings_button.dart';
 
 class Settings extends StatelessWidget {
@@ -17,9 +19,9 @@ class Settings extends StatelessWidget {
             color: MyColors.yellow,
             size: 25,
           ),
-          text: 'Personal Information',
+          text: 'Personal Data',
           onPressed: () {
-            // context.push(AppRouter.kPersonalInfoScreen, extra: user);
+            context.push(AppRouter.kPersonalDataScreen);
           },
         ),
         SettingsButton(

@@ -35,17 +35,12 @@ class SettingsButton extends StatelessWidget {
             child: icon,
           ),
           const SizedBox(width: 15),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                text,
-                style: Styles.textStyle18.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: MyColors.black.withValues(alpha: .8),
-                ),
-              ),
-            ],
+          Text(
+            text,
+            style: Styles.textStyle18.copyWith(
+              fontWeight: FontWeight.bold,
+              color: MyColors.black.withValues(alpha: .8),
+            ),
           ),
           const Spacer(),
           Icon(
