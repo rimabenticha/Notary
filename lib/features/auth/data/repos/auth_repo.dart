@@ -3,9 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:noteary/core/errors/failure.dart';
 import 'package:noteary/features/auth/data/models/user_model.dart';
 
-
 abstract class AuthRepo {
-  Future<Either<Failure, User>> signup({
+  Future<Either<Failure, User>> signUp({
     required String username,
     required String email,
     required String password,

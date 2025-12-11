@@ -7,7 +7,6 @@ import 'package:noteary/core/utils/service_locator.dart';
 import 'package:noteary/features/auth/data/models/user_model.dart';
 import 'package:noteary/features/auth/data/repos/auth_repo.dart';
 
-
 class AuthRepoImpl implements AuthRepo {
   final AuthServices authService;
   final FirebaseFirestore _cloudFirestore = getIt.get<FirebaseFirestore>();
@@ -21,7 +20,7 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, User>> signup({
+  Future<Either<Failure, User>> signUp({
     required String email,
     required String password,
     required String username,
