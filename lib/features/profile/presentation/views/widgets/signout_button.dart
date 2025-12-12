@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:noteary/core/styles/colors.dart';
 import 'package:noteary/core/styles/sizes.dart';
 import 'package:noteary/core/styles/styles.dart';
-import 'package:noteary/core/utils/app_router.dart';
 import 'package:noteary/core/utils/functions/custom_snack_bar.dart';
 import 'package:noteary/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
 
@@ -31,8 +30,11 @@ class SignoutButton extends StatelessWidget {
           );
         }
         if (state is Unauthenticated) {
-          context.pop();
-          context.go(AppRouter.kSignInScreen);
+          customSnackBar(
+            context: context,
+            message: 'Signed out successfully!',
+            success: true,
+          );
         }
       },
       child: TextButton(

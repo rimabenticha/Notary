@@ -12,20 +12,26 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   setup();
+
   Bloc.observer = SimpleBlocObserver();
-  runApp(const Noteary());
+
+  final AuthCubit authCubit = AuthCubit(getIt.get<AuthRepoImpl>());
+  AppRouter.initialize(authCubit);
+
+  runApp(Noteary(authCubit: authCubit));
 }
 
 class Noteary extends StatelessWidget {
-  const Noteary({super.key});
+  const Noteary({super.key, required this.authCubit});
+
+  final AuthCubit authCubit;
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => AuthCubit(getIt.get<AuthRepoImpl>())),
-      ],
+      providers: [BlocProvider.value(value: authCubit)],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         routerConfig: AppRouter.router,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:noteary/core/styles/styles.dart';
-import 'package:noteary/core/utils/app_router.dart';
 import 'package:noteary/core/utils/functions/custom_snack_bar.dart';
 import 'package:noteary/core/widgets/custom_elevated_button.dart';
 import 'package:noteary/core/widgets/custom_password_text_field.dart';
@@ -46,8 +45,11 @@ class _SignInFormState extends State<SignInForm> {
             success: false,
           );
         } else if (state is Authenticated) {
-          context.pop();
-          context.go(AppRouter.kNavigationMenu);
+          customSnackBar(
+            context: context,
+            message: 'Welcome back!',
+            success: true,
+          );
         }
       },
       child: Form(

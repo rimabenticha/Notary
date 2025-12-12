@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,9 +9,29 @@ import 'package:noteary/features/auth/data/repos/auth_repo.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit(this._authRepo) : super(AuthCubitInitial());
+  AuthCubit(this._authRepo) : super(AuthCubitInitial()) {
+    _checkAuthStatus();
+  }
 
   final AuthRepo _authRepo;
+  StreamSubscription<User?>? authSubscription;
+
+  void _checkAuthStatus() {
+    authSubscription = _authRepo.authStateChanges().listen(
+      (user) {
+        if (isClosed) return;
+        if (user != null) {
+          emit(Authenticated(user: user));
+        } else {
+          emit(Unauthenticated());
+        }
+      },
+      onError: (error) {
+        if (isClosed) return;
+        emit(AuthFailure(errMessage: error.toString()));
+      },
+    );
+  }
 
   Future<void> signUp({
     required String email,

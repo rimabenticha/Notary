@@ -1,4 +1,8 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:noteary/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
 import 'package:noteary/features/auth/presentation/views/signin_screen.dart';
 import 'package:noteary/features/auth/presentation/views/signup_screen.dart';
 import 'package:noteary/features/home/presentation/views/home_screen.dart';
@@ -20,9 +24,44 @@ abstract class AppRouter {
   static const String kPasswordScreen = '/passwordScreen';
   static const String kContactUsScreen = '/contactUsScreen';
 
+  static AuthCubit? _authCubit;
+  static void initialize(AuthCubit authCubit) {
+    _authCubit = authCubit;
+  }
+
   static final router = GoRouter(
+    observers: [routeObserver],
+    initialLocation: kSignInScreen,
+    refreshListenable: _authCubit != null
+        ? GoRouterRefreshStream(_authCubit!.stream)
+        : null,
+    redirect: (context, state) {
+      if (_authCubit == null) return null;
+      final authState = _authCubit!.state;
+      final currentLocation = state.matchedLocation;
+
+      if (authState is Authenticated) {
+        if (currentLocation == kSignInScreen ||
+            currentLocation == kSignUpScreen) {
+          return kNavigationMenu;
+        }
+      }
+
+      if (authState is Unauthenticated) {
+        if (currentLocation != kSignInScreen && currentLocation != kSignUpScreen
+        // && currentLocation != kForgotPasswordScreen
+        ) {
+          return kSignInScreen;
+        }
+      }
+
+      return null;
+    },
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const SigninScreen()),
+      GoRoute(
+        path: kSignInScreen,
+        builder: (context, state) => const SigninScreen(),
+      ),
       GoRoute(
         path: kSignUpScreen,
         builder: (context, state) => const SignupScreen(),
@@ -57,4 +96,24 @@ abstract class AppRouter {
       ),
     ],
   );
+}
+
+final RouteObserver<ModalRoute<void>> routeObserver =
+    RouteObserver<ModalRoute<void>>();
+
+class GoRouterRefreshStream extends ChangeNotifier {
+  GoRouterRefreshStream(Stream<dynamic> stream) {
+    notifyListeners();
+    _subscription = stream.asBroadcastStream().listen(
+      (dynamic _) => notifyListeners(),
+    );
+  }
+
+  late final StreamSubscription<dynamic> _subscription;
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
+  }
 }
