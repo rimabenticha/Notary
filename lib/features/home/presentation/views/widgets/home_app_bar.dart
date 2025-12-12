@@ -12,8 +12,8 @@ class HomeAppBar extends StatelessWidget {
     return SliverAppBar(
       title: Row(
         children: [
-          CircleAvatar(radius: 25),
-          SizedBox(width: 10),
+          const CircleAvatar(radius: 25),
+          const SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -32,7 +32,7 @@ class HomeAppBar extends StatelessWidget {
                       text:
                           getIt.get<FirebaseAuth>().currentUser?.displayName ??
                           'New User',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: MyColors.pruple,
                       ),

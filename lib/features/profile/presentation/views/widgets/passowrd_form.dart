@@ -38,21 +38,21 @@ class _PasswordFormState extends State<PasswordForm> {
             hintText: 'Enter your current password',
             warningText: 'Please enter your current password!',
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           CustomPasswordTextField(
             textController: _newPasswordController,
             label: 'New Password',
             hintText: 'Enter your new password',
             warningText: 'Please enter your new password!',
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           CustomPasswordTextField(
             textController: _confirmNewPasswordController,
             label: 'Confirm New Password',
             hintText: 'Enter your new password',
             warningText: 'Please enter your new password!',
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           CustomElevatedButton(
             label: 'Update Password',
             onPressed: () {

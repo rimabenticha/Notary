@@ -25,7 +25,7 @@ class SigninScreenBody extends StatelessWidget {
             image: AssetImage(AssetsData.signInIllustration),
             width: 250,
           ),
-          SignInForm(),
+          const SignInForm(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

@@ -43,7 +43,7 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
             hintText: 'Enter your first name',
             warningText: 'Please enter your first name!',
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           CustomTextFormField(
             enabled: false,
             textController: _emailController,
@@ -51,7 +51,7 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
             hintText: 'Enter your email',
             warningText: 'Please enter your email!',
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           CustomElevatedButton(
             label: 'Save Changes',
             onPressed: () {

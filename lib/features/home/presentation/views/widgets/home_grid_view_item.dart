@@ -21,7 +21,7 @@ class HomeGridViewItem extends StatelessWidget {
                 'title',
                 style: Styles.textStyle20.copyWith(fontWeight: FontWeight.w600),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text(
                 'ihjftiocjcvtkoikkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmmmmmmmmmmmmmmmmmmmmmmhhhhhhhhhhhhhhhhhhh',
                 style: Styles.textStyle16.copyWith(

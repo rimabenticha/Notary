@@ -9,7 +9,7 @@ class ProfileScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return const SingleChildScrollView(
       padding: kPadd16,
       child: Center(
         child: Column(

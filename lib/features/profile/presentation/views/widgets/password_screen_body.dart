@@ -17,8 +17,8 @@ class PasswordScreenBody extends StatelessWidget {
             'The new password must be different from the current password and must be at least 8 characters long.',
             style: Styles.textStyle16.copyWith(fontWeight: FontWeight.w400),
           ),
-          SizedBox(height: 20),
-          PasswordForm(),
+          const SizedBox(height: 20),
+          const PasswordForm(),
         ],
       ),
     );

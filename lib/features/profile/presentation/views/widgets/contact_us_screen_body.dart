@@ -7,6 +7,9 @@ class ContactUsScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(padding: kPadd16, child: ContactUsForm());
+    return const SingleChildScrollView(
+      padding: kPadd16,
+      child: ContactUsForm(),
+    );
   }
 }
