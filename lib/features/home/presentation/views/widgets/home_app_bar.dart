@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:noteary/core/styles/colors.dart';
 import 'package:noteary/core/styles/styles.dart';
+import 'package:noteary/core/utils/service_locator.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
@@ -14,10 +17,32 @@ class HomeAppBar extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Welcome back,', style: Styles.textStyle16),
-              Text(
-                'Oumaima zaouali,',
-                style: Styles.textStyle18.copyWith(fontWeight: FontWeight.bold),
+              RichText(
+                text: TextSpan(
+                  style: Styles.textStyle16,
+                  children: [
+                    const TextSpan(
+                      text: 'Hello, ',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text:
+                          getIt.get<FirebaseAuth>().currentUser?.displayName ??
+                          'New User',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: MyColors.pruple,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Text(
+                'Hope you\'re doing well today!',
+                style: Styles.textStyle14,
               ),
             ],
           ),

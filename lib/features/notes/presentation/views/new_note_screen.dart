@@ -108,7 +108,7 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
         height: 80,
         child: FloatingActionButton(
           onPressed: _listen,
-          backgroundColor: _isListening == true ? Colors.red : MyColors.blue,
+          backgroundColor: _isListening == true ? Colors.red : MyColors.pruple,
           shape: const CircleBorder(),
           child: const Icon(Icons.mic, size: 36, color: MyColors.white),
         ),

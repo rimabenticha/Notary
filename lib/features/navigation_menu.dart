@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:noteary/core/styles/colors.dart';
 import 'package:noteary/features/home/presentation/views/home_screen.dart';
 import 'package:noteary/features/profile/presentation/views/profile_screen.dart';
 
@@ -43,7 +44,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: NavigationBar(
-        indicatorColor: Colors.lightBlueAccent,
+        indicatorColor: MyColors.lightBlue,
         height: 70,
         elevation: 0,
         selectedIndex: _selectedIndex,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:noteary/core/styles/colors.dart';
 import 'package:noteary/core/utils/app_router.dart';
 import 'package:noteary/features/home/presentation/views/widgets/home_screen_body.dart';
 
@@ -11,6 +12,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: const SafeArea(child: HomeScreenBody()),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: MyColors.yellow,
         onPressed: () {
           context.push(AppRouter.kNewNoteScreen);
         },

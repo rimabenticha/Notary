@@ -46,12 +46,12 @@ class SignoutButton extends StatelessWidget {
           children: [
             Container(
               decoration: const BoxDecoration(
-                color: MyColors.blue,
+                color: MyColors.yellow,
                 shape: BoxShape.circle,
               ),
               width: 40,
               height: 40,
-              child: const Icon(Icons.logout, color: MyColors.yellow, size: 25),
+              child: const Icon(Icons.logout, color: MyColors.pruple, size: 25),
             ),
             const SizedBox(width: 15),
             Text(

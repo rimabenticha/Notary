@@ -27,7 +27,7 @@ class SettingsButton extends StatelessWidget {
         children: [
           Container(
             decoration: const BoxDecoration(
-              color: MyColors.blue,
+              color: MyColors.yellow,
               shape: BoxShape.circle,
             ),
             width: 40,

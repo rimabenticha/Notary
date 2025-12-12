@@ -16,7 +16,7 @@ class Settings extends StatelessWidget {
         SettingsButton(
           icon: const Icon(
             Icons.person_outline,
-            color: MyColors.yellow,
+            color: MyColors.pruple,
             size: 25,
           ),
           text: 'Personal Data',
@@ -27,7 +27,7 @@ class Settings extends StatelessWidget {
         SettingsButton(
           icon: const Icon(
             Icons.lock_outline,
-            color: MyColors.yellow,
+            color: MyColors.pruple,
             size: 25,
           ),
           text: 'Password',
@@ -39,7 +39,7 @@ class Settings extends StatelessWidget {
         SettingsButton(
           icon: const Icon(
             Icons.shield_outlined,
-            color: MyColors.yellow,
+            color: MyColors.pruple,
             size: 25,
           ),
           text: 'Privacy Policy',
@@ -50,7 +50,7 @@ class Settings extends StatelessWidget {
         SettingsButton(
           icon: const Icon(
             Icons.question_mark,
-            color: MyColors.yellow,
+            color: MyColors.pruple,
             size: 25,
           ),
           text: 'FAQ',
@@ -61,7 +61,7 @@ class Settings extends StatelessWidget {
         SettingsButton(
           icon: const Icon(
             Icons.email_outlined,
-            color: MyColors.yellow,
+            color: MyColors.pruple,
             size: 25,
           ),
           text: 'Contact Us',
