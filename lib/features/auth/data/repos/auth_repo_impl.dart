@@ -76,7 +76,7 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, User>> signin({
+  Future<Either<Failure, User>> signIn({
     required String email,
     required String password,
   }) async {
@@ -95,7 +95,7 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, Unit>> signout() async {
+  Future<Either<Failure, Unit>> signOut() async {
     try {
       await authService.signout();
       return right(unit);

@@ -57,4 +57,26 @@ class AuthCubit extends Cubit<AuthState> {
       (user) => emit(UserCreationSuccess()),
     );
   }
+
+  Future<void> signIn({required String email, required String password}) async {
+    if (isClosed) return;
+    emit(AuthLoading());
+    final result = await _authRepo.signIn(email: email, password: password);
+    if (isClosed) return;
+    result.fold(
+      (failure) => emit(AuthFailure(errMessage: failure.message)),
+      (user) => emit(Authenticated(user: user)),
+    );
+  }
+
+  Future<void> signOut() async {
+    if (isClosed) return;
+    emit(AuthLoading());
+    if (isClosed) return;
+    final result = await _authRepo.signOut();
+    result.fold(
+      (failure) => emit(AuthFailure(errMessage: failure.message)),
+      (success) => emit(Unauthenticated()),
+    );
+  }
 }

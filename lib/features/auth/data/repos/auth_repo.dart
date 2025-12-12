@@ -13,12 +13,12 @@ abstract class AuthRepo {
   //* Store user info in cloud firestore
   Future<Either<Failure, Unit>> createUser(UserModel user);
 
-  Future<Either<Failure, User>> signin({
+  Future<Either<Failure, User>> signIn({
     required String email,
     required String password,
   });
 
-  Future<Either<Failure, Unit>> signout();
+  Future<Either<Failure, Unit>> signOut();
 
   Future<Either<Failure, Unit>> resetPassword({required String email});
 
