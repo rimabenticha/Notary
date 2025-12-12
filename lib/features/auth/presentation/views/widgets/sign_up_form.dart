@@ -47,14 +47,14 @@ class _SignUpFormState extends State<SignUpForm> {
                 const Center(child: CircularProgressIndicator()),
           );
         } else if (state is AuthFailure) {
-          Navigator.pop(context);
+          context.pop();
           customSnackBar(
             context: context,
             message: state.errMessage,
             success: false,
           );
         } else if (state is Authenticated) {
-          Navigator.pop(context);
+          context.pop();
           context.go(AppRouter.kNavigationMenu);
         }
       },
