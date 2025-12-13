@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:noteary/core/styles/sizes.dart';
-import 'package:noteary/features/home/presentation/views/widgets/home_grid_view_item.dart';
-import 'package:noteary/features/notes/data/models/note_model.dart';
+import 'package:noteary/features/home/presentation/views/widgets/home_grid_view_skeleton.dart';
 
-class HomeGridView extends StatelessWidget {
-  const HomeGridView({super.key, required this.notes});
-
-  final List<NoteModel> notes;
+class HomeGridViewLoading extends StatelessWidget {
+  const HomeGridViewLoading({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +13,9 @@ class HomeGridView extends StatelessWidget {
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
         ),
-        itemCount: notes.length,
+        itemCount: 6,
         itemBuilder: (context, index) {
-          return HomeGridViewItem(note: notes[index], index: index);
+          return const HomeGridViewItemSkeleton();
         },
       ),
     );

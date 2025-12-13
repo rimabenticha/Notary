@@ -7,7 +7,7 @@ import 'package:noteary/core/utils/app_router.dart';
 import 'package:noteary/core/utils/service_locator.dart';
 import 'package:noteary/features/home/presentation/manager/get_notes_cubit/get_notes_cubit.dart';
 import 'package:noteary/features/home/presentation/views/widgets/home_app_bar.dart';
-import 'package:noteary/features/home/presentation/views/widgets/home_grid_view.dart';
+import 'package:noteary/features/home/presentation/views/widgets/home_grid_view_bloc_builder.dart';
 import 'package:noteary/features/home/presentation/views/widgets/home_search_bar.dart';
 
 class HomeScreenBody extends StatefulWidget {
@@ -44,7 +44,7 @@ class _HomeScreenBodyState extends State<HomeScreenBody> with RouteAware {
   @override
   Widget build(BuildContext context) {
     return const CustomScrollView(
-      slivers: [HomeAppBar(), HomeSearchBar(), HomeGridView()],
+      slivers: [HomeAppBar(), HomeSearchBar(), HomeGridViewBlocBuilder()],
     );
   }
 }
