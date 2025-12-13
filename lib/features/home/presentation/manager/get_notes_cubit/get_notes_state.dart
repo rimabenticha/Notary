@@ -13,13 +13,15 @@ final class GetNotesLoading extends GetNotesState {}
 
 final class GetNotesSuccess extends GetNotesState {
   final List<NoteModel> notes;
+
   const GetNotesSuccess({required this.notes});
-  @override
-  List<Object> get props => [notes];
+  // @override
+  // List<Object> get props => [notes];
 }
 
 final class GetNotesFailure extends GetNotesState {
   final String errMessage;
+
   const GetNotesFailure({required this.errMessage});
   @override
   List<Object> get props => [errMessage];

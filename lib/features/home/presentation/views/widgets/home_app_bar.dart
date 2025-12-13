@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:noteary/core/styles/colors.dart';
 import 'package:noteary/core/styles/styles.dart';
+import 'package:noteary/core/utils/assets.dart';
 import 'package:noteary/core/utils/service_locator.dart';
 
 class HomeAppBar extends StatelessWidget {
@@ -12,7 +13,11 @@ class HomeAppBar extends StatelessWidget {
     return SliverAppBar(
       title: Row(
         children: [
-          const CircleAvatar(radius: 25),
+          const CircleAvatar(
+            radius: 25,
+            backgroundColor: MyColors.grey,
+            foregroundImage: AssetImage(AssetsData.defaultAvatar),
+          ),
           const SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

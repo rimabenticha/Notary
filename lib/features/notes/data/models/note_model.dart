@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class NoteModel extends Equatable {
@@ -20,7 +21,9 @@ class NoteModel extends Equatable {
     uid: json['uid'] as String?,
     title: json['title'] as String?,
     content: json['content'] as String?,
-    createdAt: json['createdAt'] as DateTime?,
+    createdAt: json['createdAt'] is Timestamp
+        ? (json['createdAt'] as Timestamp).toDate()
+        : json['createdAt'] as DateTime?,
   );
 
   Map<String, dynamic> toJson() => {
@@ -28,7 +31,7 @@ class NoteModel extends Equatable {
     'uid': uid,
     'title': title,
     'content': content,
-    'createdAt': createdAt,
+    'createdAt': createdAt != null ? Timestamp.fromDate(createdAt!) : null,
   };
 
   NoteModel copyWith({
