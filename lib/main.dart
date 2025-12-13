@@ -6,6 +6,8 @@ import 'package:noteary/core/utils/bloc_observer.dart';
 import 'package:noteary/core/utils/service_locator.dart';
 import 'package:noteary/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:noteary/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
+import 'package:noteary/features/home/presentation/manager/get_notes_cubit/get_notes_cubit.dart';
+import 'package:noteary/features/notes/data/repos/notes_repo_impl.dart';
 
 import 'firebase_options.dart';
 
@@ -31,7 +33,12 @@ class Noteary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider.value(value: authCubit)],
+      providers: [
+        BlocProvider.value(value: authCubit),
+        BlocProvider(
+          create: (context) => GetNotesCubit(getIt.get<NotesRepoImpl>()),
+        ),
+      ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         routerConfig: AppRouter.router,
