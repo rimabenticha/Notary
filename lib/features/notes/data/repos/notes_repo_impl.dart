@@ -8,13 +8,33 @@ import 'package:noteary/features/notes/data/repos/notes_repo.dart';
 
 class NotesRepoImpl implements NotesRepo {
   final FirebaseFirestore _cloudFirestore = getIt.get<FirebaseFirestore>();
-  // final FirebaseAuth _firebaseAuth = getIt.get<FirebaseAuth>();
 
   @override
   Future<Either<Failure, Unit>> saveNote({required NoteModel note}) async {
     try {
       await _cloudFirestore.collection('notes').doc(note.id).set(note.toJson());
       return right(unit);
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        return left(FirebaseFailure.fromFirebaseAuth(e));
+      }
+      return left(FirebaseFailure('An unexpected error occurred'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<NoteModel>>> getNotes({
+    required String uid,
+  }) async {
+    try {
+      final notes = await _cloudFirestore
+          .collection('notes')
+          .where('uid', isEqualTo: uid)
+          .orderBy('createdAt', descending: true)
+          .get();
+      return right(
+        notes.docs.map((doc) => NoteModel.fromJson(doc.data())).toList(),
+      );
     } catch (e) {
       if (e is FirebaseAuthException) {
         return left(FirebaseFailure.fromFirebaseAuth(e));
