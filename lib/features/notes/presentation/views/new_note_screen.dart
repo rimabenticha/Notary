@@ -26,6 +26,7 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
   late SpeechToText _speech;
   bool _isListening = false;
   String _text = 'Press the button and start speaking';
+  final TextEditingController _titleController = TextEditingController();
 
   @override
   void initState() {
@@ -96,7 +97,19 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
         builder: (context) {
           return Scaffold(
             appBar: AppBar(
-              title: const Text('New Note'),
+              title: TextFormField(
+                controller: _titleController,
+                decoration: const InputDecoration(
+                  // label: Text('Title'),
+                  hintText: 'Title',
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a title!';
+                  }
+                  return null;
+                },
+              ),
               actions: [
                 BlocListener<SaveNoteCubit, SaveNoteState>(
                   listener: (context, state) {
@@ -125,11 +138,27 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
                   },
                   child: IconButton(
                     onPressed: () {
+                      if (_titleController.text.isEmpty) {
+                        customSnackBar(
+                          context: context,
+                          message: 'Please enter a title!',
+                          success: false,
+                        );
+                        return;
+                      }
+                      if (_text == 'Press the button and start speaking') {
+                        customSnackBar(
+                          context: context,
+                          message: 'Please start speaking!',
+                          success: false,
+                        );
+                        return;
+                      }
                       context.read<SaveNoteCubit>().saveNote(
                         note: NoteModel(
                           id: getIt.get<Uuid>().v4(),
                           uid: getIt.get<FirebaseAuth>().currentUser?.uid,
-                          title: 'New Note',
+                          title: _titleController.text,
                           content: _text,
                           createdAt: DateTime.now(),
                         ),
@@ -143,10 +172,15 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
             body: SingleChildScrollView(
               reverse: true,
               padding: kPadd16,
-              child: Text(
-                _text,
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 24),
+              child: Column(
+                children: [
+                  const SizedBox(height: 20),
+                  Text(
+                    _text,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 24),
+                  ),
+                ],
               ),
             ),
             floatingActionButtonLocation:
