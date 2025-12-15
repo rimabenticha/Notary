@@ -15,7 +15,7 @@ class HomeGridViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.push(AppRouter.kNoteConentScreen),
+      onTap: () => context.push(AppRouter.kNoteConentScreen, extra: note),
       child: Card(
         color: [
           MyColors.lightPurple,

@@ -8,6 +8,7 @@ import 'package:noteary/features/auth/presentation/views/signin_screen.dart';
 import 'package:noteary/features/auth/presentation/views/signup_screen.dart';
 import 'package:noteary/features/home/presentation/views/home_screen.dart';
 import 'package:noteary/features/navigation_menu.dart';
+import 'package:noteary/features/notes/data/models/note_model.dart';
 import 'package:noteary/features/notes/presentation/views/new_note_screen.dart';
 import 'package:noteary/features/notes/presentation/views/note_content_screen.dart';
 import 'package:noteary/features/profile/presentation/views/contact_us_screen.dart';
@@ -82,7 +83,10 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kNoteConentScreen,
-        builder: (context, state) => const NoteContentScreen(),
+        builder: (context, state) {
+          final note = state.extra as NoteModel;
+          return NoteContentScreen(note: note);
+        },
       ),
       GoRoute(
         path: kPersonalDataScreen,
