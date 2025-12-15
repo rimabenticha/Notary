@@ -7,6 +7,7 @@ import 'package:noteary/core/styles/colors.dart';
 import 'package:noteary/core/utils/app_router.dart';
 import 'package:noteary/core/utils/service_locator.dart';
 import 'package:noteary/features/home/presentation/manager/get_notes_cubit/get_notes_cubit.dart';
+import 'package:noteary/features/home/presentation/manager/search_cubit/search_cubit.dart';
 import 'package:noteary/features/home/presentation/views/widgets/home_screen_body.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -14,23 +15,26 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: LiquidPullToRefresh(
-        showChildOpacityTransition: false,
-        color: MyColors.lightBlue,
-        animSpeedFactor: 3,
-        springAnimationDurationInMilliseconds: 1000,
-        onRefresh: () async => await context.read<GetNotesCubit>().getNotes(
-          uid: getIt.get<FirebaseAuth>().currentUser!.uid,
+    return BlocProvider(
+      create: (context) => SearchCubit(),
+      child: Scaffold(
+        body: LiquidPullToRefresh(
+          showChildOpacityTransition: false,
+          color: MyColors.lightBlue,
+          animSpeedFactor: 3,
+          springAnimationDurationInMilliseconds: 1000,
+          onRefresh: () async => await context.read<GetNotesCubit>().getNotes(
+            uid: getIt.get<FirebaseAuth>().currentUser!.uid,
+          ),
+          child: const SafeArea(child: HomeScreenBody()),
         ),
-        child: const SafeArea(child: HomeScreenBody()),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: MyColors.yellow,
-        onPressed: () {
-          context.push(AppRouter.kNewNoteScreen);
-        },
-        child: const Icon(Icons.add, size: 36),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: MyColors.yellow,
+          onPressed: () {
+            context.push(AppRouter.kNewNoteScreen);
+          },
+          child: const Icon(Icons.add, size: 36),
+        ),
       ),
     );
   }

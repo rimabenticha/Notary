@@ -10,12 +10,17 @@ class GetNotesCubit extends Cubit<GetNotesState> {
 
   final NotesRepo _notesRepo;
 
+  List<NoteModel> notes = [];
+
   Future<void> getNotes({required String uid}) async {
     emit(GetNotesLoading());
     final result = await _notesRepo.getNotes(uid: uid);
     result.fold(
       (failure) => emit(GetNotesFailure(errMessage: failure.message)),
-      (notes) => emit(GetNotesSuccess(notes: notes)),
+      (notes) {
+        this.notes = notes;
+        emit(GetNotesSuccess(notes: notes));
+      },
     );
   }
 }

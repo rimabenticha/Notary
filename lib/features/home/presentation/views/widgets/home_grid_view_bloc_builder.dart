@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:noteary/core/styles/styles.dart';
-import 'package:noteary/core/utils/assets.dart';
 import 'package:noteary/features/home/presentation/manager/get_notes_cubit/get_notes_cubit.dart';
 import 'package:noteary/features/home/presentation/views/widgets/home_grid_view.dart';
 import 'package:noteary/features/home/presentation/views/widgets/home_grid_view_loading.dart';
+import 'package:noteary/features/home/presentation/views/widgets/no_notes_found.dart';
 
 class HomeGridViewBlocBuilder extends StatelessWidget {
   const HomeGridViewBlocBuilder({super.key});
@@ -15,20 +14,7 @@ class HomeGridViewBlocBuilder extends StatelessWidget {
       builder: (context, state) {
         if (state is GetNotesSuccess) {
           if (state.notes.isEmpty) {
-            return const SliverToBoxAdapter(
-              child: Center(
-                child: Column(
-                  children: [
-                    Image(
-                      image: AssetImage(AssetsData.noNotesIllustration),
-                      width: 300,
-                    ),
-                    SizedBox(height: 10),
-                    Text('No notes found', style: Styles.textStyle16),
-                  ],
-                ),
-              ),
-            );
+            return const NoNotesFound();
           }
           return HomeGridView(notes: state.notes);
         } else if (state is GetNotesFailure) {

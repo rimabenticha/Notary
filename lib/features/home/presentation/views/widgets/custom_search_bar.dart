@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:noteary/features/home/presentation/manager/get_notes_cubit/get_notes_cubit.dart';
+import 'package:noteary/features/home/presentation/manager/search_cubit/search_cubit.dart';
 
 class CustomSearchBar extends StatefulWidget {
   const CustomSearchBar({super.key, this.width});
@@ -27,20 +30,20 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
         controller: _searchController,
         onChanged: (query) {
           if (query.isEmpty) {
-            // context.read<SearchCubit>().resetSearch();
+            context.read<SearchCubit>().resetSearch();
           } else {
-            // context.read<SearchCubit>().searchProduct(
-            //   products: products,
-            //   query: query,
-            // );
+            context.read<SearchCubit>().searchNotes(
+              notes: context.read<GetNotesCubit>().notes,
+              query: query,
+            );
           }
         },
         onSubmitted: (query) {
           if (query.isNotEmpty) {
-            // context.read<SearchCubit>().searchProduct(
-            //   products: products,
-            //   query: query,
-            // );
+            context.read<SearchCubit>().searchNotes(
+              notes: context.read<GetNotesCubit>().notes,
+              query: query,
+            );
           }
         },
         hintText: 'Search...',
