@@ -42,4 +42,17 @@ class NotesRepoImpl implements NotesRepo {
       return left(FirebaseFailure('An unexpected error occurred'));
     }
   }
+
+  @override
+  Future<Either<Failure, Unit>> deleteNote({required String id}) async {
+    try {
+      await _cloudFirestore.collection('notes').doc(id).delete();
+      return right(unit);
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        return left(FirebaseFailure.fromFirebaseAuth(e));
+      }
+      return left(FirebaseFailure('An unexpected error occurred'));
+    }
+  }
 }

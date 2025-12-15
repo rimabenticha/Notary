@@ -6,4 +6,6 @@ abstract class NotesRepo {
   Future<Either<Failure, Unit>> saveNote({required NoteModel note});
 
   Future<Either<Failure, List<NoteModel>>> getNotes({required String uid});
+
+  Future<Either<Failure, Unit>> deleteNote({required String id});
 }
