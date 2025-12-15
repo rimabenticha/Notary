@@ -37,3 +37,14 @@ final class UserCreationFailure extends AuthState {
 
   const UserCreationFailure({required this.errMessage});
 }
+
+//* Reset password states
+final class ResetPasswordLoading extends AuthState {}
+
+final class ResetPasswordSuccess extends AuthState {}
+
+final class ResetPasswordFailure extends AuthState {
+  final String errMessage;
+
+  const ResetPasswordFailure({required this.errMessage});
+}
