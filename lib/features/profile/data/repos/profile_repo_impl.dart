@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:noteary/core/errors/failure.dart';
 import 'package:noteary/core/utils/auth_services.dart';
 import 'package:noteary/core/utils/service_locator.dart';
+import 'package:noteary/features/profile/data/models/contact_us_model.dart';
 import 'package:noteary/features/profile/data/repos/profile_repo.dart';
 
 class ProfileRepoImpl implements ProfileRepo {
@@ -60,6 +61,21 @@ class ProfileRepoImpl implements ProfileRepo {
   }) async {
     try {
       await authService.updatePassword(newPassword: newPassword);
+      return right(unit);
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        return left(FirebaseFailure.fromFirebaseAuth(e));
+      }
+      return left(FirebaseFailure('An unexpected error occurred'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> contactUs({
+    required ContactUsModel contactUs,
+  }) async {
+    try {
+      await _cloudFirestore.collection('contact_us').add(contactUs.toJson());
       return right(unit);
     } catch (e) {
       if (e is FirebaseAuthException) {
