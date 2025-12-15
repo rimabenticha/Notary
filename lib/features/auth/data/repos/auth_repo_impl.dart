@@ -7,7 +7,6 @@ import 'package:noteary/core/utils/service_locator.dart';
 import 'package:noteary/features/auth/data/models/user_model.dart';
 import 'package:noteary/features/auth/data/repos/auth_repo.dart';
 
-
 class AuthRepoImpl implements AuthRepo {
   final AuthServices authService;
   final FirebaseFirestore _cloudFirestore = getIt.get<FirebaseFirestore>();
@@ -21,10 +20,10 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, User>> signup({
+  Future<Either<Failure, User>> signUp({
     required String email,
     required String password,
-    required String username,
+    required String fullName,
   }) async {
     try {
       final userCredential = await authService.createUserWithEmailAndPassword(
@@ -32,7 +31,7 @@ class AuthRepoImpl implements AuthRepo {
         password: password,
       );
 
-      await userCredential.user?.updateDisplayName(username);
+      await userCredential.user?.updateDisplayName(fullName);
       await userCredential.user?.reload();
       final updatedUser = getIt.get<FirebaseAuth>().currentUser;
 
@@ -77,7 +76,7 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, User>> signin({
+  Future<Either<Failure, User>> signIn({
     required String email,
     required String password,
   }) async {
@@ -96,7 +95,7 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, Unit>> signout() async {
+  Future<Either<Failure, Unit>> signOut() async {
     try {
       await authService.signout();
       return right(unit);

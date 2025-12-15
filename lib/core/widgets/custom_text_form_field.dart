@@ -12,6 +12,7 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLength,
     this.keyboardType,
     this.isRequired,
+    this.enabled = true,
   });
 
   final TextEditingController textController;
@@ -22,10 +23,12 @@ class CustomTextFormField extends StatelessWidget {
   final int? maxLength;
   final TextInputType? keyboardType;
   final bool? isRequired;
+  final bool? enabled;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: enabled,
       controller: textController,
       validator: isRequired == false
           ? null

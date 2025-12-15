@@ -1,4 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:noteary/core/styles/colors.dart';
+import 'package:noteary/core/utils/service_locator.dart';
+import 'package:noteary/features/home/presentation/manager/get_notes_cubit/get_notes_cubit.dart';
 import 'package:noteary/features/home/presentation/views/home_screen.dart';
 import 'package:noteary/features/profile/presentation/views/profile_screen.dart';
 
@@ -20,30 +25,27 @@ class _NavigationMenuState extends State<NavigationMenu> {
 
   final List<Widget> _screens = [const HomeScreen(), const ProfileScreen()];
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   WidgetsBinding.instance.addPostFrameCallback((_) {
-  //     _fetchData();
-  //   });
-  // }
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _fetchData();
+    });
+  }
 
-  // Future<void> _fetchData() async {
-  //   final fetchUserDataCubit = context.read<FetchUserDataCubit>();
-  //   final fetchUsersCubit = context.read<FetchUsersCubit>();
+  Future<void> _fetchData() async {
+    final getNotesCubit = context.read<GetNotesCubit>();
 
-  //   await fetchUserDataCubit.fetchUserData(
-  //     uid: getIt.get<FirebaseAuth>().currentUser!.uid,
-  //   );
-
-  //   await fetchUsersCubit.fetchUsers();
-  // }
+    await getNotesCubit.getNotes(
+      uid: getIt.get<FirebaseAuth>().currentUser!.uid,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: NavigationBar(
-        indicatorColor: Colors.lightBlueAccent,
+        indicatorColor: MyColors.lightBlue,
         height: 70,
         elevation: 0,
         selectedIndex: _selectedIndex,

@@ -8,13 +8,14 @@ class CustomPasswordTextField extends StatefulWidget {
     required this.label,
     required this.hintText,
     required this.warningText,
-    //required String? Function(value) validator,
+    this.validator,
   });
 
   final TextEditingController textController;
   final String label;
   final String hintText;
   final String warningText;
+  final String? Function(String?)? validator;
 
   @override
   State<CustomPasswordTextField> createState() =>
@@ -29,12 +30,14 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
     return TextFormField(
       obscureText: _isVisible,
       controller: widget.textController,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return widget.warningText;
-        }
-        return null;
-      },
+      validator:
+          widget.validator ??
+          (value) {
+            if (value == null || value.isEmpty) {
+              return widget.warningText;
+            }
+            return null;
+          },
       decoration: InputDecoration(
         hintText: widget.hintText,
         label: Text(widget.label),
@@ -48,10 +51,9 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
               _isVisible = !_isVisible;
             });
           },
-          icon:
-              _isVisible
-                  ? const Icon(Icons.visibility_outlined)
-                  : const Icon(Icons.visibility_off_outlined),
+          icon: _isVisible
+              ? const Icon(Icons.visibility_outlined)
+              : const Icon(Icons.visibility_off_outlined),
         ),
       ),
     );

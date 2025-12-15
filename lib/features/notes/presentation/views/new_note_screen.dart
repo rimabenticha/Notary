@@ -1,10 +1,19 @@
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:noteary/core/styles/colors.dart';
 import 'package:noteary/core/styles/sizes.dart';
+import 'package:noteary/core/utils/functions/custom_snack_bar.dart';
+import 'package:noteary/core/utils/service_locator.dart';
+import 'package:noteary/features/notes/data/models/note_model.dart';
+import 'package:noteary/features/notes/data/repos/notes_repo_impl.dart';
+import 'package:noteary/features/notes/presentation/manager/save_note_cubit/save_note_cubit.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'package:uuid/uuid.dart';
 
 class NewNoteScreen extends StatefulWidget {
   const NewNoteScreen({super.key});
@@ -81,37 +90,81 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('New Note'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              // TODO: save note
-            },
-            icon: const Icon(Icons.save, size: 30),
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        reverse: true,
-        padding: kPadd16,
-        child: Text(
-          _text,
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 24),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: SizedBox(
-        width: 80,
-        height: 80,
-        child: FloatingActionButton(
-          onPressed: _listen,
-          backgroundColor: _isListening == true ? Colors.red : MyColors.blue,
-          shape: const CircleBorder(),
-          child: const Icon(Icons.mic, size: 36, color: MyColors.white),
-        ),
+    return BlocProvider(
+      create: (context) => SaveNoteCubit(getIt.get<NotesRepoImpl>()),
+      child: Builder(
+        builder: (context) {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('New Note'),
+              actions: [
+                BlocListener<SaveNoteCubit, SaveNoteState>(
+                  listener: (context, state) {
+                    if (state is SaveNoteLoading) {
+                      showDialog(
+                        context: context,
+                        builder: (context) =>
+                            const Center(child: CircularProgressIndicator()),
+                      );
+                    } else if (state is SaveNoteSuccess) {
+                      context.pop();
+                      context.pop();
+                      customSnackBar(
+                        context: context,
+                        message: 'Note saved successfully!',
+                        success: true,
+                      );
+                    } else if (state is SaveNoteFailure) {
+                      context.pop();
+                      customSnackBar(
+                        context: context,
+                        message: state.errMessage,
+                        success: false,
+                      );
+                    }
+                  },
+                  child: IconButton(
+                    onPressed: () {
+                      context.read<SaveNoteCubit>().saveNote(
+                        note: NoteModel(
+                          id: getIt.get<Uuid>().v4(),
+                          uid: getIt.get<FirebaseAuth>().currentUser?.uid,
+                          title: 'New Note',
+                          content: _text,
+                          createdAt: DateTime.now(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.save, size: 30),
+                  ),
+                ),
+              ],
+            ),
+            body: SingleChildScrollView(
+              reverse: true,
+              padding: kPadd16,
+              child: Text(
+                _text,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 24),
+              ),
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            floatingActionButton: SizedBox(
+              width: 80,
+              height: 80,
+              child: FloatingActionButton(
+                onPressed: _listen,
+                backgroundColor: _isListening == true
+                    ? Colors.red
+                    : MyColors.pruple,
+                shape: const CircleBorder(),
+                child: const Icon(Icons.mic, size: 36, color: MyColors.white),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

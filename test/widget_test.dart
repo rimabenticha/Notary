@@ -7,12 +7,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:noteary/core/utils/service_locator.dart';
+import 'package:noteary/features/auth/data/repos/auth_repo_impl.dart';
+import 'package:noteary/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
 import 'package:noteary/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const Noteary());
+    final AuthCubit authCubit = AuthCubit(getIt.get<AuthRepoImpl>());
+    await tester.pumpWidget(Noteary(authCubit: authCubit));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
