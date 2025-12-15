@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:noteary/core/styles/sizes.dart';
-import 'package:noteary/features/auth/data/models/user_model.dart';
 import 'package:noteary/features/profile/presentation/views/widgets/personal_data_form.dart';
 
 class PersonalDataScreenBody extends StatelessWidget {
@@ -10,13 +9,7 @@ class PersonalDataScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SingleChildScrollView(
       padding: kPadd16,
-      child: PersonalDataForm(
-        user: UserModel(
-          fullName: 'Rima',
-          email: 'rima@gmail.com',
-          uid: '1234567890',
-        ),
-      ),
+      child: PersonalDataForm(),
     );
   }
 }

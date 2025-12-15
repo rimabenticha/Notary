@@ -1,12 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:noteary/core/utils/service_locator.dart';
 import 'package:noteary/core/widgets/custom_elevated_button.dart';
 import 'package:noteary/core/widgets/custom_text_form_field.dart';
-import 'package:noteary/features/auth/data/models/user_model.dart';
 
 class PersonalDataForm extends StatefulWidget {
-  const PersonalDataForm({super.key, required this.user});
-
-  final UserModel user;
+  const PersonalDataForm({super.key});
 
   @override
   State<PersonalDataForm> createState() => _PersonalDataFormState();
@@ -26,8 +25,9 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
   @override
   void initState() {
     super.initState();
-    _fullNameController.text = widget.user.fullName ?? '';
-    _emailController.text = widget.user.email ?? '';
+    _fullNameController.text =
+        getIt.get<FirebaseAuth>().currentUser?.displayName ?? '';
+    _emailController.text = getIt.get<FirebaseAuth>().currentUser?.email ?? '';
   }
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
