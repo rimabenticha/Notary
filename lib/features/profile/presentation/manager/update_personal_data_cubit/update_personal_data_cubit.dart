@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noteary/features/profile/data/repos/profile_repo.dart';
 
@@ -10,12 +11,12 @@ class UpdatePersonalDataCubit extends Cubit<UpdatePersonalDataState> {
 
   final ProfileRepo _profileRepo;
 
-  Future<void> updatePersonalInfo({String? fullName}) async {
+  Future<void> updatePersonalData({String? fullName}) async {
     emit(UpdatePersonalDataLoading());
     final result = await _profileRepo.updatePersonalData(fullName: fullName);
     result.fold(
       (failure) => emit(UpdatePersonalDataFailure(errMessage: failure.message)),
-      (success) => emit(UpdatePersonalDataSuccess()),
+      (user) => emit(UpdatePersonalDataSuccess(user: user)),
     );
   }
 }

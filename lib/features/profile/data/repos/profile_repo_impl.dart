@@ -10,7 +10,7 @@ class ProfileRepoImpl implements ProfileRepo {
   final FirebaseAuth _firebaseAuth = getIt.get<FirebaseAuth>();
 
   @override
-  Future<Either<Failure, Unit>> updatePersonalData({String? fullName}) async {
+  Future<Either<Failure, User>> updatePersonalData({String? fullName}) async {
     try {
       if (fullName != null) {
         await getIt.get<FirebaseAuth>().currentUser!.updateDisplayName(
@@ -23,7 +23,7 @@ class ProfileRepoImpl implements ProfileRepo {
           .collection('users')
           .doc(_firebaseAuth.currentUser!.uid)
           .update({'fullName': refreshedUser.displayName});
-      return right(unit);
+      return right(refreshedUser);
     } catch (e) {
       if (e is FirebaseAuthException) {
         return left(FirebaseFailure.fromFirebaseAuth(e));

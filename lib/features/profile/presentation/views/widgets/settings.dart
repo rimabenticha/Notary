@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:noteary/core/styles/colors.dart';
 import 'package:noteary/core/utils/app_router.dart';
+import 'package:noteary/features/profile/presentation/manager/update_personal_data_cubit/update_personal_data_cubit.dart';
 import 'package:noteary/features/profile/presentation/views/widgets/settings_button.dart';
 
 class Settings extends StatelessWidget {
@@ -21,7 +23,9 @@ class Settings extends StatelessWidget {
           ),
           text: 'Personal Data',
           onPressed: () {
-            context.push(AppRouter.kPersonalDataScreen);
+            final updatePersonalDataCubit = context
+                .read<UpdatePersonalDataCubit>();
+            context.push(AppRouter.kPersonalDataScreen, extra: updatePersonalDataCubit);
           },
         ),
         SettingsButton(

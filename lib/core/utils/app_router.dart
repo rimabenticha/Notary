@@ -11,6 +11,7 @@ import 'package:noteary/features/navigation_menu.dart';
 import 'package:noteary/features/notes/data/models/note_model.dart';
 import 'package:noteary/features/notes/presentation/views/new_note_screen.dart';
 import 'package:noteary/features/notes/presentation/views/note_content_screen.dart';
+import 'package:noteary/features/profile/presentation/manager/update_personal_data_cubit/update_personal_data_cubit.dart';
 import 'package:noteary/features/profile/presentation/views/contact_us_screen.dart';
 import 'package:noteary/features/profile/presentation/views/password_screen.dart';
 import 'package:noteary/features/profile/presentation/views/personal_data_screen.dart';
@@ -90,7 +91,13 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kPersonalDataScreen,
-        builder: (context, state) => const PersonalDataScreen(),
+        builder: (context, state) {
+          final updatePersonalDataCubit =
+              state.extra as UpdatePersonalDataCubit;
+          return PersonalDataScreen(
+            updatePersonalDataCubit: updatePersonalDataCubit,
+          );
+        },
       ),
       GoRoute(
         path: kPasswordScreen,

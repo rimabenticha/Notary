@@ -11,7 +11,10 @@ final class UpdatePersonalDataInitial extends UpdatePersonalDataState {}
 
 final class UpdatePersonalDataLoading extends UpdatePersonalDataState {}
 
-final class UpdatePersonalDataSuccess extends UpdatePersonalDataState {}
+final class UpdatePersonalDataSuccess extends UpdatePersonalDataState {
+  final User user;
+  const UpdatePersonalDataSuccess({required this.user});
+}
 
 final class UpdatePersonalDataFailure extends UpdatePersonalDataState {
   final String errMessage;
