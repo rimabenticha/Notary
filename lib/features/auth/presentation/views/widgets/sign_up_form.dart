@@ -53,7 +53,6 @@ class _SignUpFormState extends State<SignUpForm> {
             success: false,
           );
         } else if (state is Authenticated) {
-          context.pop();
           customSnackBar(
             context: context,
             message: 'Account created successfully!',

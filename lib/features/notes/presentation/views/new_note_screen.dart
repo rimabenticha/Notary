@@ -65,7 +65,7 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
       if (available) {
         setState(() => _isListening = true);
         _speech.listen(
-          listenFor: const Duration(seconds: 15),
+          listenFor: const Duration(minutes: 2),
           onResult: (result) {
             setState(() {
               _text = result.recognizedWords;
