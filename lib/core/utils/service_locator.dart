@@ -23,7 +23,9 @@ void setup() {
 
   getIt.registerSingleton<NotesRepoImpl>(NotesRepoImpl());
 
-  getIt.registerSingleton<ProfileRepoImpl>(ProfileRepoImpl());
+  getIt.registerSingleton<ProfileRepoImpl>(
+    ProfileRepoImpl(authService: getIt.get<AuthServices>()),
+  );
 
   // getIt.registerSingleton<HomeRepoImpl>(
   //   //HomeRepoImpl(HomeRemoteDataSourceImpl()),

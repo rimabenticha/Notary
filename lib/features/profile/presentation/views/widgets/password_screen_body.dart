@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:noteary/core/styles/sizes.dart';
 import 'package:noteary/core/styles/styles.dart';
-import 'package:noteary/features/profile/presentation/views/widgets/passowrd_form.dart';
+import 'package:noteary/features/profile/presentation/views/widgets/password_form.dart';
 
 class PasswordScreenBody extends StatelessWidget {
   const PasswordScreenBody({super.key});
