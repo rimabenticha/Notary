@@ -62,7 +62,7 @@ class Settings extends StatelessWidget {
           ),
           text: 'FAQ',
           onPressed: () {
-            // context.push(AppRouter.kFAQScreen);
+            context.push(AppRouter.kFaqScreen);
           },
         ),
         SettingsButton(

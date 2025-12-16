@@ -13,6 +13,7 @@ import 'package:noteary/features/notes/presentation/views/new_note_screen.dart';
 import 'package:noteary/features/notes/presentation/views/note_content_screen.dart';
 import 'package:noteary/features/profile/presentation/manager/update_personal_data_cubit/update_personal_data_cubit.dart';
 import 'package:noteary/features/profile/presentation/views/contact_us_screen.dart';
+import 'package:noteary/features/profile/presentation/views/faq_screen.dart';
 import 'package:noteary/features/profile/presentation/views/password_screen.dart';
 import 'package:noteary/features/profile/presentation/views/personal_data_screen.dart';
 import 'package:noteary/features/profile/presentation/views/privacy_policy_screen.dart';
@@ -29,6 +30,7 @@ abstract class AppRouter {
   static const String kContactUsScreen = '/contactUsScreen';
   static const String kForgotPasswordScreen = '/forgotPasswordScreen';
   static const String kPrivacyPolicyScreen = '/privacyPolicyScreen';
+  static const String kFaqScreen = '/faqScreen';
 
   static AuthCubit? _authCubit;
   static void initialize(AuthCubit authCubit) {
@@ -116,6 +118,10 @@ abstract class AppRouter {
       GoRoute(
         path: kPrivacyPolicyScreen,
         builder: (context, state) => const PrivacyPolicyScreen(),
+      ),
+      GoRoute(
+        path: kFaqScreen,
+        builder: (context, state) => const FaqScreen(),
       ),
     ],
   );
