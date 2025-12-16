@@ -25,7 +25,10 @@ class Settings extends StatelessWidget {
           onPressed: () {
             final updatePersonalDataCubit = context
                 .read<UpdatePersonalDataCubit>();
-            context.push(AppRouter.kPersonalDataScreen, extra: updatePersonalDataCubit);
+            context.push(
+              AppRouter.kPersonalDataScreen,
+              extra: updatePersonalDataCubit,
+            );
           },
         ),
         SettingsButton(
@@ -48,7 +51,7 @@ class Settings extends StatelessWidget {
           ),
           text: 'Privacy Policy',
           onPressed: () {
-            // context.push(AppRouter.kPrivacyPolicyScreen);
+            context.push(AppRouter.kPrivacyPolicyScreen);
           },
         ),
         SettingsButton(

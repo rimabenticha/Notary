@@ -15,6 +15,7 @@ import 'package:noteary/features/profile/presentation/manager/update_personal_da
 import 'package:noteary/features/profile/presentation/views/contact_us_screen.dart';
 import 'package:noteary/features/profile/presentation/views/password_screen.dart';
 import 'package:noteary/features/profile/presentation/views/personal_data_screen.dart';
+import 'package:noteary/features/profile/presentation/views/privacy_policy_screen.dart';
 
 abstract class AppRouter {
   static const String kSignInScreen = '/';
@@ -27,6 +28,7 @@ abstract class AppRouter {
   static const String kPasswordScreen = '/passwordScreen';
   static const String kContactUsScreen = '/contactUsScreen';
   static const String kForgotPasswordScreen = '/forgotPasswordScreen';
+  static const String kPrivacyPolicyScreen = '/privacyPolicyScreen';
 
   static AuthCubit? _authCubit;
   static void initialize(AuthCubit authCubit) {
@@ -110,6 +112,10 @@ abstract class AppRouter {
       GoRoute(
         path: kForgotPasswordScreen,
         builder: (context, state) => const ForgotPasswordScreen(),
+      ),
+      GoRoute(
+        path: kPrivacyPolicyScreen,
+        builder: (context, state) => const PrivacyPolicyScreen(),
       ),
     ],
   );
